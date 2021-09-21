@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 const Navbar = ({ cart }) => {
   const [cartCount, setCartCount] = useState(0);
 
+  // If anything changes in cart and cartCount refresh
   useEffect(() => {
     let count = 0;
     cart.forEach((item) => {
