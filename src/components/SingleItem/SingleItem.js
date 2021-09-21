@@ -8,7 +8,7 @@ const SingleItem = ({ current, addToCart }) => {
   return (
     <div className={styles.singleItem}>
       <img
-        className={styles.singleItem__image}
+        className={styles.singleItem__image} 
         src={current.image}
         alt={current.title}
       />
