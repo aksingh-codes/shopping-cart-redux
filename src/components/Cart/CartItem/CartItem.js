@@ -8,10 +8,8 @@ const CartItem = ({ item, removeFromCart, adjustQty }) => {
   const [input, setInput] = useState(item.qty);
 
   const onChangeHandler = (e) => {
-    let value = parseInt(e.target.value)
-    setInput(value);
-    adjustQty(item.id, value);
-    console.log(typeof(value));
+    setInput(e.target.value);
+    adjustQty(item.id, e.target.value);
   };
 
   return (
@@ -29,7 +27,7 @@ const CartItem = ({ item, removeFromCart, adjustQty }) => {
       <div className={styles.cartItem__actions}>
         <div className={styles.cartItem__qty}>
           <label htmlFor="qty">Qty</label>
-          <input min="1" type="number" id="qty" name="qty" onChange={onChangeHandler} value={input} />
+          <input min={1} type="number" id="qty" name="qty" onChange={onChangeHandler} value={input} />
         </div>
         <button
           onClick={() => removeFromCart(item.id)}
@@ -45,4 +43,11 @@ const CartItem = ({ item, removeFromCart, adjustQty }) => {
   );
 };
 
-export default connect(null, { removeFromCart,adjustQty })(CartItem);
+const mapDispatchToProps = dispatch => {
+  return {
+    removeFromCart: (id) => dispatch(removeFromCart(id)),
+    adjustQty: (id,value) => dispatch(adjustQty(id,value))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CartItem);
